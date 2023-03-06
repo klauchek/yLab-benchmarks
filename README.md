@@ -5,25 +5,38 @@ compiler: g++ (GCC) 12.2.1
 [soucre](https://github.com/tilir/cpp-graduate/blob/master/12-templates/benchemplace.cc)
 
 - debug mode
+
+
 ![Screenshot](pics/emplace_debug.png)
 
 - -O2
+
 ![Screenshot](pics/EMPLACE_O2.png)
+
+
 ## memcpy, naive copy and std::copy: 
 [soucre](https://github.com/tilir/cpp-graduate/blob/master/13-sfinae/benchcopy.cc)
 - debug mode
+
+
 ![Screenshot](pics/naive_debug.png)
 
 - -O2
+
+
 ![Screenshot](pics/NAIVE_O2.png)
 
 ## memcpy, non naive copy and std::copy:
 [soucre](https://github.com/tilir/cpp-graduate/blob/master/13-sfinae/benchcopy-2.cc)
 
 - debug mode
+
+
 ![Screenshot](pics/nonnaive_debug.png)
 
 - -O2
+
+
 ![Screenshot](pics/NON_NAIVE_02.png)
 
 
