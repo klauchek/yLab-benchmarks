@@ -25,17 +25,10 @@ constexpr int NSZ = 10000;
 
 struct Heavy {
   std::vector<int> v;
-  Heavy(int n) NOINLINE : v(n) {
-#ifdef VISUALIZE
-    std::cout << "default-ctor\n";
-#endif
-  }
+  Heavy(int n) NOINLINE : v(n) {}
 
   // inefective copy-ctor (with some work inside)
   Heavy(const Heavy &rhs) NOINLINE : v(rhs.v) {
-#ifdef VISUALIZE
-    std::cout << "copy-ctor\n";
-#endif
     for (auto &elt : v)
       elt *= 17;
   }
@@ -50,7 +43,8 @@ static void bench_push_back(benchmark::State& state) {
   std::vector<Heavy> v_push;
   v_push.reserve(state.range(0));
   for(auto _ : state) {
-    v_push.push_back(Heavy{NSZ});
+    for (int i = 0; i < state.range(0); ++i)
+      v_push.push_back(Heavy{NSZ});
   }
   long long aggpush = 0;
   for (auto &&p : v_push)
@@ -62,7 +56,8 @@ static void bench_emplace(benchmark::State& state) {
   std::vector<Heavy> v_emplace;
   v_emplace.reserve(state.range(0));
   for(auto _ : state) {
-    v_emplace.emplace_back(NSZ);
+    for (int i = 0; i < state.range(0); ++i)
+      v_emplace.emplace_back(NSZ);
   }
   long long aggemplace = 0;
   for (auto &&p : v_emplace)

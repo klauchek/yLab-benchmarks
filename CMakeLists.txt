@@ -15,6 +15,21 @@ FetchContent_Declare(googlebenchmark
 FetchContent_MakeAvailable(
         googlebenchmark)
 
-add_executable(yLab_benchmark
-            benchcopy-2.cc)
+option(TEST_EMPLACE OFF)
+option(TEST_NAIVE_COPY OFF)
+option(TEST_NON_NAIVE_COPY OFF)
+
+
+if(TEST_EMPLACE)
+    set(SRCS benchemplace.cc)
+elseif(TEST_NAIVE_COPY)
+    set(SRCS benchcopy.cc)
+elseif(TEST_NON_NAIVE_COPY)
+    set(SRCS benchcopy-2.cc)
+else()
+    message(FATAL_ERROR "Choose bench to run")
+endif()
+
+add_executable(yLab_benchmark ${SRCS})
+target_compile_options(yLab_benchmark PRIVATE -O2)
 target_link_libraries(yLab_benchmark benchmark::benchmark)
